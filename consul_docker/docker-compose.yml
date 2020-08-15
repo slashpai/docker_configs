@@ -1,7 +1,7 @@
-version: "3.5"
+version: "3.7"
 services:
   consul_server_01:
-    image: "consul:0.9.3" # change 0.9.3 to version required if needed
+    image: "consul:1.0.7" # change to version required
     container_name: "consul_server_01"
     hostname: "consul_server_01"
     ports:
@@ -10,21 +10,21 @@ services:
       - "8600:8600"
     command: "agent -server -bootstrap-expect 3 -ui -client=0.0.0.0"
   consul_server_02:
-    image: "consul:0.9.3"
+    image: "consul:1.0.7"
     container_name: "consul_server_02"
     hostname: "consul_server_02"
     command: "agent -server -join consul_server_01"
     depends_on:
       - consul_server_01
   consul_server_03:
-    image: "consul:0.9.3"
+    image: "consul:1.0.7"
     container_name: "consul_server_03"
     hostname: "consul_server_03"
     command: "agent -server -join consul_server_01"
     depends_on:
       - consul_server_01
   consul_client_01:
-    image: "consul:0.9.3"
+    image: "consul:1.0.7"
     container_name: "consul_client_01"
     hostname: "consul_client_01"
     command: "agent -join consul_server_01"
